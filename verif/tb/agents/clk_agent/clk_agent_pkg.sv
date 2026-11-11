@@ -18,7 +18,7 @@ package clk_agent_pkg;
   `include "clk_agent_cfg.svh"
   `include "clk_item.svh"
 
-  typedef uvm_sequencer #(clk_item) clk_sequencer;
+  `include "clk_sequencer.svh"
 
   `include "clk_driver.svh"
   `include "clk_monitor.svh"

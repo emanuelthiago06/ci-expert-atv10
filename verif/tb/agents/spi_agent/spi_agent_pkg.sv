@@ -37,7 +37,7 @@ package spi_agent_pkg;
   `include "spi_agent_cfg.svh"
   `include "spi_item.svh"
 
-  typedef uvm_sequencer #(spi_item) spi_sequencer;
+  `include "spi_sequencer.svh"
 
   `include "spi_driver.svh"
   `include "spi_monitor.svh"

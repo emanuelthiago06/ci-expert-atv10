@@ -18,7 +18,7 @@ package rst_agent_pkg;
   `include "rst_agent_cfg.svh"
   `include "rst_item.svh"
 
-  typedef uvm_sequencer #(rst_item) rst_sequencer;
+  `include "rst_sequencer.svh"
 
   `include "rst_driver.svh"
   `include "rst_monitor.svh"
