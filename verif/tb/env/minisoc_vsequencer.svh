@@ -14,6 +14,9 @@ class minisoc_vsequencer extends uvm_sequencer;
   clk_sequencer ref_clk_sqr;
   clk_sequencer mem_clk_sqr;
   rst_sequencer rst_sqr;
+  spi_sequencer spi_sqr;
+
+  spi_monitor   spi_mon;
 
   clk_monitor   ref_clk_mon;
   clk_monitor   mem_clk_mon;

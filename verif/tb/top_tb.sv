@@ -7,9 +7,10 @@
 //   rst_if      -> rst_n        (rst_agent, ACTIVE)
 //   mem_clk_if  -> mem_clk      (clk_agent, ACTIVE)
 //   sys_clk_if  <- dut.sys_clk  (clk_agent, PASSIVE probe of the PLL output)
+//   spi_vif     <-> SPI pins    (spi_agent, ACTIVE master)
 //
-// SPI and MEMORY DATA pins are tied to their idle values until the SPI and
-// MEMORY DATA agents are integrated (Nov/2026 milestone).
+// MEMORY DATA pins are tied to their idle values until the MEMORY DATA agent
+// is integrated (Nov/2026 milestone).
 //
 // Waves: +define+WAVES_FSDB (Verdi) or +define+WAVES_VPD at compile time.
 // ----------------------------------------------------------------------------
@@ -23,9 +24,7 @@ module tb_top;
   clk_if mem_clk_if ();
   clk_if sys_clk_if ();
   rst_if rst_vif    ();
-
-  // SPI tie-off (idle: CS_N high, SCLK low).
-  logic        spi_miso;
+  spi_if spi_vif    ();
 
   // MEMORY DATA tie-off.
   logic [31:0] mem_o_data;
@@ -34,10 +33,10 @@ module tb_top;
     .clk         (ref_clk_if.clk),
     .rst_n       (rst_vif.rst_n),
 
-    .spi_sclk    (1'b0),
-    .spi_cs_n    (1'b1),
-    .spi_mosi    (1'b0),
-    .spi_miso    (spi_miso),
+    .spi_sclk    (spi_vif.sclk),
+    .spi_cs_n    (spi_vif.cs_n),
+    .spi_mosi    (spi_vif.mosi),
+    .spi_miso    (spi_vif.miso),
 
     .mem_clk     (mem_clk_if.clk),
     .mem_i_data  (32'b0),
@@ -56,6 +55,7 @@ module tb_top;
     uvm_config_db#(virtual clk_if)::set(null, "uvm_test_top", "mem_clk_vif", mem_clk_if);
     uvm_config_db#(virtual clk_if)::set(null, "uvm_test_top", "sys_clk_vif", sys_clk_if);
     uvm_config_db#(virtual rst_if)::set(null, "uvm_test_top", "rst_vif", rst_vif);
+    uvm_config_db#(virtual spi_if)::set(null, "uvm_test_top", "spi_vif", spi_vif);
     run_test();
   end
 

@@ -36,6 +36,9 @@ class minisoc_base_test extends uvm_test;
     if (!uvm_config_db#(virtual rst_if)::get(this, "", "rst_vif", cfg.rst_cfg.vif))
       `uvm_fatal("NOVIF", "rst_vif not found")
 
+    if (!uvm_config_db#(virtual spi_if)::get(this, "", "spi_vif", cfg.spi_cfg.vif))
+      `uvm_fatal("NOVIF", "spi_vif not found")
+
     void'($value$plusargs("MEM_CLK_PERIOD_PS=%d", cfg.mem_clk_cfg.init_period_ps));
 
     configure(cfg);

@@ -10,9 +10,11 @@ package minisoc_seq_pkg;
 
   import clk_agent_pkg::*;
   import rst_agent_pkg::*;
+  import spi_agent_pkg::*;
   import minisoc_env_pkg::*;
 
   `include "minisoc_base_vseq.svh"
   `include "minisoc_smoke_vseq.svh"
+  `include "minisoc_spi_basic_vseq.svh"
 
 endpackage : minisoc_seq_pkg

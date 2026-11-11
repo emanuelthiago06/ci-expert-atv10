@@ -9,6 +9,10 @@
 ../tb/agents/rst_agent/rst_if.sv
 ../tb/agents/rst_agent/rst_agent_pkg.sv
 
++incdir+../tb/agents/spi_agent
+../tb/agents/spi_agent/spi_if.sv
+../tb/agents/spi_agent/spi_agent_pkg.sv
+
 // Environment, sequences, tests
 +incdir+../tb/env
 ../tb/env/minisoc_env_pkg.sv

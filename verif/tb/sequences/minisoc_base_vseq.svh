@@ -22,6 +22,23 @@ class minisoc_base_vseq extends uvm_sequence;
     s.start(p_sequencer.rst_sqr, this);
   endtask
 
+  // SPI register write (one frame).
+  task spi_write(bit [5:0] addr, bit [31:0] data);
+    spi_write_seq s = spi_write_seq::type_id::create("spi_wr");
+    s.addr = addr;
+    s.data = data;
+    s.start(p_sequencer.spi_sqr, this);
+  endtask
+
+  // SPI register read (two frames). hdr is MISO[39:32]; 0 in a correct DUT.
+  task spi_read(bit [5:0] addr, output bit [31:0] data, output bit [7:0] hdr);
+    spi_read_seq s = spi_read_seq::type_id::create("spi_rd");
+    s.addr = addr;
+    s.start(p_sequencer.spi_sqr, this);
+    data = s.rdata;
+    hdr  = s.rhdr;
+  endtask
+
   task wait_ps(int unsigned ps);
     #(ps * 1ps);
   endtask
