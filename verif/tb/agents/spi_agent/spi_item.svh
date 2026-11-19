@@ -26,4 +26,9 @@ time t_end;
                      miso_unknown ? " (MISO has X/Z)" : "", t_start);
   endfunction
 
+  function bit [39:0] getframe():
+    return {rwb, addr, rsv, data};
+  endfunction
+
+
 endclass: spi_item
