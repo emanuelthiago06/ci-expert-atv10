@@ -38,7 +38,7 @@ protected task drive_frame(spi_item tr);
     vif.cs_n = 1'b0;
     #(cfg.cs_setup_ps * 1ps);
 
-    for (int n_bits=0; n_bits<tr.nbits; n_bits++) begin
+    for (int n=0; n<tr.nbits; n++) begin
 
         vif.mosi = frame[39 - n];
         #(half);
