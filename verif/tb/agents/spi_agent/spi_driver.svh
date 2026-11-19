@@ -13,7 +13,7 @@ function void build_phase(uvm_phase phase);
     super.build_phase(phase);
     if (!uvm_config_db#(spi_agent_cfg)::get(this, "", "cfg", cfg))
         `uvm_fatal("NOCFG", "spi_agent_cfg not found")
-    vif = cfg.vif
+    vif = cfg.vif;
 endfunction
 
 task run_phase(uvm_phase phase);
@@ -30,18 +30,28 @@ task run_phase(uvm_phase phase);
 endtask
 
 protected task drive_frame(spi_item tr);
-    int unsigned clk = cfg.sclk_period_ps / 2;
-    bit [0:39] frame = tr.getframe();
-    tr.miso_frame = 40'b0;
+    time half  = (cfg.sclk_period_ps / 2) * 1ps;
+    bit [39:0] frame = tr.getframe();
+    tr.miso_frame = '0;
+    tr.t_start = $time;
 
     vif.cs_n = 1'b0;
     #(cfg.cs_setup_ps * 1ps);
 
-    for (int n_bits=0; n_bits>tr.nbits; n_bits++) begin
-    
+    for (int n_bits=0; n_bits<tr.nbits; n_bits++) begin
+
+        vif.mosi = frame[39 - n];
+        #(half);
+        vif.sclk = 1'b1;
+        vif.miso_frame[39 - n] = vif.miso;
+        #(half);
+        vif.sclk = 1'b0;
+
     end
 
-    
-
+    #(cfg.cs_hold_ps * 1ps);
+    vif.cs_n = 1'b1;
+    vif.mosi = 1'b0;
+    tr.t_end = $time;
     
 endtask
