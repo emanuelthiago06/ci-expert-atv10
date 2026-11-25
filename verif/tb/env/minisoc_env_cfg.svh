@@ -10,6 +10,7 @@ class minisoc_env_cfg extends uvm_object;
   clk_agent_cfg sys_clk_cfg;   // dut.sys_clk probe, passive
   rst_agent_cfg rst_cfg;
   spi_agent_cfg spi_cfg;
+  mem_agent_cfg mem_cfg;
 
   function new(string name = "minisoc_env_cfg");
     super.new(name);
@@ -18,6 +19,7 @@ class minisoc_env_cfg extends uvm_object;
     sys_clk_cfg = clk_agent_cfg::type_id::create("sys_clk_cfg");
     rst_cfg     = rst_agent_cfg::type_id::create("rst_cfg");
     spi_cfg     = spi_agent_cfg::type_id::create("spi_cfg");
+    mem_cfg     = mem_agent_cfg::type_id::create("mem_cfg");
 
     ref_clk_cfg.init_period_ps = 500;      // 2 GHz
     mem_clk_cfg.init_period_ps = 10_000;   // 100 MHz

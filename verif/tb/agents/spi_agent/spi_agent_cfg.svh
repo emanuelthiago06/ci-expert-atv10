@@ -2,8 +2,6 @@ class spi_agent_cfg extends uvm_object;
 
 `uvm_object_utils(spi_agent_cfg);
 
-cfg = spi_agent_cfg::type_id::create("cfg");
-
 virtual spi_if vif;
 
 uvm_active_passive_enum is_active = UVM_ACTIVE;

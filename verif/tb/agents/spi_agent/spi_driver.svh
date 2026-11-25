@@ -43,7 +43,7 @@ protected task drive_frame(spi_item tr);
         vif.mosi = frame[39 - n];
         #(half);
         vif.sclk = 1'b1;
-        vif.miso_frame[39 - n] = vif.miso;
+        tr.miso_frame[39 - n] = vif.miso;
         #(half);
         vif.sclk = 1'b0;
 
@@ -53,5 +53,7 @@ protected task drive_frame(spi_item tr);
     vif.cs_n = 1'b1;
     vif.mosi = 1'b0;
     tr.t_end = $time;
-    
+
 endtask
+
+endclass : spi_driver

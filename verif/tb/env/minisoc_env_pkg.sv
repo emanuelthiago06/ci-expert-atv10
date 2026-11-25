@@ -14,9 +14,9 @@ package minisoc_env_pkg;
   import clk_agent_pkg::*;
   import rst_agent_pkg::*;
   import spi_agent_pkg::*;
+  import mem_agent_pkg::*;
 
   `include "minisoc_env_cfg.svh"
-  `include "minisoc_vsequencer.svh"
   `include "minisoc_env.svh"
 
 endpackage : minisoc_env_pkg

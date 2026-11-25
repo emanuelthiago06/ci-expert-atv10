@@ -13,12 +13,13 @@
 ../tb/agents/spi_agent/spi_if.sv
 ../tb/agents/spi_agent/spi_agent_pkg.sv
 
-// Environment, sequences, tests
++incdir+../tb/agents/mem_agent
+../tb/agents/mem_agent/mem_if.sv
+../tb/agents/mem_agent/mem_agent_pkg.sv
+
+// Environment and tests
 +incdir+../tb/env
 ../tb/env/minisoc_env_pkg.sv
-
-+incdir+../tb/sequences
-../tb/sequences/minisoc_seq_pkg.sv
 
 +incdir+../tb/tests
 ../tb/tests/minisoc_test_pkg.sv
